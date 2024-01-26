@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+$extra-small-breakpoint-width: 720px;
+// The small breakpoint is used for the component category and component list pages, the component
+// pages, the component sidenav, and certain aspects of the tables.
+$small-breakpoint-width: 959px;
+
+/* For desktop, the content should be aligned with the page title. */
+$content-padding-guides-side: 70px;
+$content-padding-sidenav: 50px;
+$content-padding-side-xs: 15px;
+
+$sidenav-width: 240px;
