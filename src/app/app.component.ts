@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginComponent } from './pages/login/login';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatToolbarModule, MatButtonModule, MatIconModule, LoginComponent],
+  imports: [CommonModule, RouterOutlet, MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
