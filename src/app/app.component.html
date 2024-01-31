@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="!isLogin">
   <span>Angular - Typescript - Material App</span>
   <span class="example-spacer"></span>
   <button mat-button (click)="Home()">Home</button>

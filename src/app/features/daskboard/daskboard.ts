@@ -2,7 +2,7 @@ import {Component, HostBinding, Inject, OnInit, Optional} from '@angular/core';
 import {ANIMATION_MODULE_TYPE} from '@angular/platform-browser/animations';
 
 @Component({
-    selector: 'app-daskboard',
+    selector: 'app-root',
     templateUrl: './daskboard.html',
     styleUrls: ['./daskboard.scss'],
     standalone: true,
@@ -21,7 +21,7 @@ import {ANIMATION_MODULE_TYPE} from '@angular/platform-browser/animations';
     ],
   })
 
-  export class DaskBoard implements OnInit {
+  export class DaskBoardComponent implements OnInit {
     @HostBinding('class.main-content') readonly mainContentClass = true;
     @HostBinding('class.animations-disabled') readonly animationsDisabled: boolean;
   
