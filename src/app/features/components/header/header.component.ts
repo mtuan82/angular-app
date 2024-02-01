@@ -1,18 +1,15 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {Title} from '@angular/platform-browser';
-
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { AuthService } from '../../../services/authService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'component-page-header',
   templateUrl: 'header.component.html',
   styleUrls: ['header.component.scss'],
-  standalone: true,
-  imports: [MatButtonModule, MatIconModule]
 })
 export class ComponentPageHeader {
-  constructor(public _pageTitle: Title) {}
+  constructor(public _pageTitle: Title,private router: Router, private auth: AuthService) {}
 
   @Output() toggleSidenav = new EventEmitter<void>();
 
@@ -22,5 +19,9 @@ export class ComponentPageHeader {
 
   set appTitle(title: string) {
     this._pageTitle.setTitle(title);
+  }
+
+  Logout(): void {  
+    this.auth.logout("home").subscribe();
   }
 }

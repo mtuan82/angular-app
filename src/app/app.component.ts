@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginComponent } from './pages/login/login';
 import { AuthService } from './services/authService';
+import { ComponentSideNav } from './features/components/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-root',

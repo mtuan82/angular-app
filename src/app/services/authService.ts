@@ -7,8 +7,13 @@ import { Router } from '@angular/router';
 })
 export class AuthService implements OnDestroy {
 
+    public readonly LOCALSTORAGE_IS_LOGIN: string = 'user_signed_in_app';
     private _authSub$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
     public get isAuthenticated(): Observable<boolean> {
+        if (localStorage.getItem(this.LOCALSTORAGE_IS_LOGIN) == 'true') {
+            this._authSub$.next(true);
+        }
         return this._authSub$.asObservable();
     }
 
@@ -23,34 +28,25 @@ export class AuthService implements OnDestroy {
 
     public login(username: string, password: string): Observable<void> {
         if (username.trim() == "" || password.trim() == "") {
-            return new Observable( (s) => {
-                s.error(this._authSub$.next(false))
+            localStorage.setItem(this.LOCALSTORAGE_IS_LOGIN, 'false');
+            return new Observable((s) => {
+                s.error(this._authSub$.next(false)),
                 s.error()
             });
         }
 
         return new Observable((s) => {
-            s.next(this._authSub$.next(true)) 
+            s.next(this._authSub$.next(true)),
             s.next()
-        })       
+        })
     }
 
-    // public logout(redirect: string): Observable<void> {
-    //   return from(this._authClient.signOut()).pipe(
-    //     tap( _ => (this._authSub$.next(false), this._router.navigate([redirect]))),
-    //     catchError(err => {
-    //       console.error(err);
-    //       throw new Error('Unable to sign out');
-    //     })
-    //   )
-    // }
-
-    private handleSignInResponse(status: string): void {
-        if (status !== 'SUCCESS') {
-            throw new Error(`We cannot handle the ${status} status`);
-        }
-        console.log("next")
-        this._authSub$.next(true)
-        //this._authClient.session.setCookieAndRedirect(transaction.sessionToken);
+    public logout(redirect: string): Observable<void> {
+        localStorage.removeItem(this.LOCALSTORAGE_IS_LOGIN);
+        return new Observable((s) => {
+            this._authSub$.next(false),
+            this._router.navigateByUrl(redirect)
+        })
     }
 }
+

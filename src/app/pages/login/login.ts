@@ -35,16 +35,17 @@ export class LoginComponent implements OnInit {
     }
 
     onSubmit() {
-        this.auth.login(this.username, this.password).pipe(
-         
+        this.auth.login(this.username, this.password).pipe(   
         ).subscribe({
             next: () => {
                 console.log("daskboard")
+                localStorage.setItem(this.auth.LOCALSTORAGE_IS_LOGIN, 'true');
                 this.loginValid = true;
-                this._router.navigateByUrl('daskboard');
+                this._router.navigateByUrl('/feature');
             },
             error: () => {
                 console.log("error")
+                localStorage.setItem(this.auth.LOCALSTORAGE_IS_LOGIN, 'false');
                 this.loginValid = false
             },
             complete: () => console.log("complete")
