@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './daskboard/daskboard';
-// import { InfoComponent } from './components/info/info.component';
-// import { UserComponent } from './components/user/user.component';
+import { ListItemComponent } from './listitem/listitem';
+import { UserComponent } from './user/user';
 import { ComponentSideNav } from '../components/sidenav/sidenav.component';
 
 const routes: Routes = [
@@ -15,7 +15,14 @@ const routes: Routes = [
         path: 'dashboard',
         component: DashboardComponent
       },
-      
+      {
+        path: 'listitem',
+        component: ListItemComponent
+      },
+      {
+        path: 'user',
+        component: UserComponent
+      },
     ]
   }
 ];

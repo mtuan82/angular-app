@@ -1,5 +1,5 @@
-<mat-sidenav-container autosize color="primary">
-  <mat-sidenav #sidenav mode="side" opened="isExpanded">
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" opened="isExpanded" fixedTopGap="100">
     <mat-nav-list>
 
       <mat-list-item (click)="isExpanded = !isExpanded">
@@ -12,15 +12,15 @@
         <span *ngIf="isExpanded" class="menu-item">Dashboard</span>
       </mat-list-item>
 
-      <!-- <mat-list-item [routerLink]="'info'">
-        <mat-icon mat-list-icon>important_devices</mat-icon>
-        <span *ngIf="isExpanded" class="menu-item">Info</span>
+      <mat-list-item [routerLink]="'listitem'">
+        <mat-icon mat-list-icon>format_list_bulleted</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">List Item</span>
       </mat-list-item>
 
       <mat-list-item [routerLink]="'user'">
         <mat-icon mat-list-icon>supervisor_account</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">User</span>
-      </mat-list-item> -->
+      </mat-list-item>
 
     </mat-nav-list>
   </mat-sidenav>
