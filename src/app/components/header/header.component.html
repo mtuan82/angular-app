@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" *ngIf="!isLogin">
+    <span>Angular - Typescript - Material App</span>
+    <span class="menu-spacer"></span>
+    <button mat-button (click)="Home()">Home</button>
+    <button mat-button (click)="Register()">Register</button>
+    <button mat-button (click)="Login()">Login</button>
+  </mat-toolbar>
+<mat-toolbar color="primary" *ngIf="isLogin">
+    <span>Angular - Typescript - Material App</span>
+    <span class="menu-spacer"></span>
+    <button mat-button (click)="Logout()">Logout</button>
+</mat-toolbar>

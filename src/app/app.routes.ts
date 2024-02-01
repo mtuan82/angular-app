@@ -1,5 +1,5 @@
-import { Routes } from '@angular/router';
-import { DashboardComponent } from './features/daskboard/daskboard';
+import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { HomeComponent } from './pages/home/home';
 import { LoginComponent } from './pages/login/login';
 import { RegisterComponent } from './pages/register/register';
@@ -10,20 +10,26 @@ export const routes: Routes = [
         pathMatch: 'full',
         component: HomeComponent
     },
-    { 
-        path: 'home', 
+    {
+        path: 'home',
         component: HomeComponent
     },
-    { 
-        path: 'login', 
+    {
+        path: 'login',
         component: LoginComponent
     },
-    { 
-        path: 'register', 
+    {
+        path: 'register',
         component: RegisterComponent
     },
-    { 
-        path: 'feature', 
+    {
+        path: 'feature',
         loadChildren: () => import('./features/feature.module').then(m => m.FeatureModule)
     },
 ];
+
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+})
+export class AppRoutingModule { }

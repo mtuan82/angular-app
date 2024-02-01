@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './daskboard/daskboard';
 // import { InfoComponent } from './components/info/info.component';
 // import { UserComponent } from './components/user/user.component';
-import { ComponentSideNav } from './components/sidenav/sidenav.component';
+import { ComponentSideNav } from '../components/sidenav/sidenav.component';
 
 const routes: Routes = [
   // Sidenavwrapper Component acts like a shell & the active child Component gets rendered into the <router-outlet>
@@ -17,11 +17,6 @@ const routes: Routes = [
       },
       
     ]
-  },
-  {
-    path: '**',
-    redirectTo: '/dashboard',
-    pathMatch: 'full'
   }
 ];
 
@@ -29,4 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class FeatureRouteModule { }
+export class FeatureModuleRoute { }

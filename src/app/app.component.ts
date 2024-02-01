@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,38 +7,26 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { LoginComponent } from './pages/login/login';
 import { AuthService } from './services/authService';
-import { ComponentSideNav } from './features/components/sidenav/sidenav.component';
+import { ComponentPageHeader } from './components/header/header.component';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, LoginComponent, NgIf],
+  imports: [CommonModule, RouterOutlet, MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, LoginComponent, NgIf, ComponentPageHeader],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 
 export class AppComponent implements OnInit {
-  isLogin: boolean = false;
+  isPublic: boolean = false;
 
   constructor(private router: Router, private auth: AuthService) { }
 
   public ngOnInit(): void {
     this.auth.isAuthenticated.subscribe((isAuthenticated: boolean) => {
-      this.isLogin = isAuthenticated;
-      console.log("isLogin " + this.isLogin)
+      this.isPublic = isAuthenticated && this.router.url.includes("/feature");
+      console.log("isPublic " + this.isPublic);
     });
   }
-
-  Home(): void {
-    this.router.navigateByUrl("home")
-  }
-
-  Login(): void {
-    this.router.navigateByUrl("login")
-  }
-
-  Register(): void {
-    this.router.navigateByUrl("register")
-  }
-
 }

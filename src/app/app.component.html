@@ -1,8 +1,2 @@
-<mat-toolbar color="primary" *ngIf="!isLogin">
-  <span>Angular - Typescript - Material App</span>
-  <span class="example-spacer"></span>
-  <button mat-button (click)="Home()">Home</button>
-  <button mat-button (click)="Register()">Register</button>
-  <button mat-button (click)="Login()">Login</button>
-</mat-toolbar>
+<component-page-header *ngIf="!isPublic"></component-page-header>
 <router-outlet></router-outlet>
