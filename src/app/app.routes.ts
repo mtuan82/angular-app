@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HomeComponent } from './pages/home/home';
 import { LoginComponent } from './pages/login/login';
 import { RegisterComponent } from './pages/register/register';
+import { AuthGuard } from './services/AuthGuard';
 
 export const routes: Routes = [
     {
@@ -23,6 +24,7 @@ export const routes: Routes = [
         component: RegisterComponent
     },
     {
+        canActivate: [AuthGuard],
         path: 'feature',
         loadChildren: () => import('./features/feature.module').then(m => m.FeatureModule)
     },

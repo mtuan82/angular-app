@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
+
 
 @Component({
   templateUrl: 'listitem.html',
   styleUrls: ['listitem.scss'],
-  standalone: true,
-  imports: [MatTableModule],
+  standalone: false,
 })
 
 export class ListItemComponent {

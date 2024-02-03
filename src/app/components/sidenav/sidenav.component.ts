@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { AuthService } from '../../services/authService';
@@ -10,7 +10,7 @@ import { AuthService } from '../../services/authService';
   standalone: false,
 })
 
-export class ComponentSideNav implements OnInit {
+export class ComponentSideNav implements OnInit, OnDestroy {
   isExpanded: boolean = false;
   private _destroySub$ = new Subject<void>();
   private readonly returnUrl: string;
@@ -21,10 +21,14 @@ export class ComponentSideNav implements OnInit {
   }
 
   public ngOnInit(): void {
-    //if not login then navigate to login page
+    //if not login then navigate to login page similar to AuthGuard
     this.auth.isAuthenticated.pipe(
       filter((isAuthenticated: boolean) => !isAuthenticated),
       takeUntil(this._destroySub$)
     ).subscribe(_ => this._router.navigateByUrl(this.returnUrl));
+  }
+
+  public ngOnDestroy(): void {
+    this._destroySub$.next();
   }
 }
