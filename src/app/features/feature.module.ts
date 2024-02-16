@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import { NgChartsModule } from 'ng2-charts';
+import { MatPaginatorModule } from '@angular/material/paginator';
 //features compponent
 import { DashboardComponent } from './daskboard/daskboard';
 import { ListItemComponent } from './listitem/listitem';
@@ -30,7 +31,8 @@ import { UserComponent } from './user/user';
     MatButtonModule,
     MatCardModule,
     MatTableModule,
-    NgChartsModule
+    NgChartsModule,
+    MatPaginatorModule
   ]
 })
 export class FeatureModule { }
