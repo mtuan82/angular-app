@@ -13,7 +13,8 @@ import { ComponentPageHeader } from './components/header/header.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, MatToolbarModule, MatButtonModule, MatInputModule, MatIconModule, LoginComponent, NgIf, ComponentPageHeader],
+  imports: [CommonModule, RouterOutlet, MatToolbarModule, MatButtonModule, MatInputModule, 
+            MatIconModule, LoginComponent, NgIf, ComponentPageHeader],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

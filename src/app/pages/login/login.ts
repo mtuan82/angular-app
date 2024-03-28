@@ -15,27 +15,25 @@ import { MatButtonModule } from '@angular/material/button';
     styleUrl: './login.scss'
 })
 export class LoginComponent {
-    public username: string = "";
-    public password: string = "";
-    public loginValid: boolean = true;
+    public username: string = "nmtuan@gmail.com1";
+    public password: string = "Navarre@2245";
+    public invalidMsg: string = "";
 
     constructor(private _router: Router, private auth: AuthService) {
         
     }
 
     onSubmit() {
-        this.auth.login(this.username, this.password).pipe(   
-        ).subscribe({
-            next: () => {
+        this.auth.login(this.username, this.password).subscribe({
+            next: (token:any) => {
                 localStorage.setItem(this.auth.LOCALSTORAGE_IS_LOGIN, 'true');
-                this.loginValid = true;
                 this._router.navigateByUrl('feature');
-                console.log("daskboard")
+                console.log("daskboard: " + token)
             },
-            error: () => {
-                console.log("error")
+            error: (msg:any) => {
+                console.log(msg.error)
                 localStorage.setItem(this.auth.LOCALSTORAGE_IS_LOGIN, 'false');
-                this.loginValid = false
+                this.invalidMsg = msg.error;
             },
             complete: () => console.log("complete")
         });
