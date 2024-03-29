@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
     standalone: true,
@@ -17,10 +18,9 @@ import { MatButtonModule } from '@angular/material/button';
 export class LoginComponent {
     public username: string = "nmtuan@gmail.com1";
     public password: string = "Navarre@2245";
-    public invalidMsg: string = "";
+    public invalidMsg = new BehaviorSubject<string>("");
 
-    constructor(private _router: Router, private auth: AuthService) {
-        
+    constructor(private _router: Router, private auth: AuthService) {     
     }
 
     onSubmit() {
@@ -33,7 +33,7 @@ export class LoginComponent {
             error: (msg:any) => {
                 console.log(msg.error)
                 localStorage.setItem(this.auth.LOCALSTORAGE_IS_LOGIN, 'false');
-                this.invalidMsg = msg.error;
+                this.invalidMsg.next(msg.error);
             },
             complete: () => console.log("complete")
         });

@@ -4,8 +4,8 @@
     </mat-card-header>
     <mat-card-content>
         <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
-            <mat-error *ngIf="invalidMsg != '' ">
-                {{invalidMsg}}
+            <mat-error *ngIf="(invalidMsg | async) != ''">
+                {{invalidMsg | async}}
             </mat-error>
             <mat-form-field appearance="outline">
                 <mat-label >Email</mat-label>
