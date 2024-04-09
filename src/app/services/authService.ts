@@ -27,12 +27,39 @@ export class AuthService implements OnDestroy {
         this._authSub$.complete();
     }
 
+    public register(model:RegisterModel):Observable<void> {
+
+        return new Observable((s) => {
+            this.http.post(this.identityUrl + "/api/Account/Register", {
+                "twoFactorEnabled": model.twoFactorEnabled,
+                "role": model.role,
+                "phoneNumber": model.phoneNumber,
+                "firstname": model.firstname,
+                "lastname": model.lastname,
+                "username": model.username,
+                "email": model.email,
+                "password": model.password
+            }).subscribe({
+                next: (res: any) => {
+                    if (res.isSuccessful = true) {
+                        s.next();
+                    }
+                    else {
+                        s.error(res.error)
+                    }
+                },
+                error: (res: any) => {
+                    s.error(res.error)
+                }
+            });
+        })
+    }
+
     public login(username: string, password: string): Observable<void> {
         if (username.trim() == "" || password.trim() == "") {
             localStorage.setItem(this.LOCALSTORAGE_IS_LOGIN, 'false');
             return new Observable((s) => {
-                s.error(this._authSub$.next(false)),
-                s.error()
+                s.error(this._authSub$.next(false))
             });
         }
 
@@ -47,13 +74,11 @@ export class AuthService implements OnDestroy {
                         s.next(this._authSub$.next(true));
                     }
                     else {
-                        s.error(res.error),
-                        s.error()
+                        s.error(res.error)
                     }
                 },
                 error: (res: any) => {
-                    s.error(res.error),
-                    s.error()
+                    s.error(res.error)
                 }
             });
         })
@@ -78,3 +103,13 @@ export class AuthService implements OnDestroy {
     }
 }
 
+interface RegisterModel {
+    firstname: string,
+    lastname: string,
+    username: string, 
+    password: string,
+    phoneNumber: string,
+    email: string,
+    role:string,
+    twoFactorEnabled: boolean
+}
