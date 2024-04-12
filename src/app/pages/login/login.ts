@@ -16,8 +16,8 @@ import { BehaviorSubject } from 'rxjs';
     styleUrl: './login.scss'
 })
 export class LoginComponent {
-    public username: string = "nmtuan@gmail.com1";
-    public password: string = "Navarre@2245";
+    public username: string = "mtuanbo@gmail.com";
+    public password: string = "Fulva@123";
     public invalidMsg = new BehaviorSubject<string>("");
 
     constructor(private _router: Router, private auth: AuthService) {     
@@ -27,6 +27,7 @@ export class LoginComponent {
         this.auth.login(this.username, this.password).subscribe({
             next: (token:any) => {
                 localStorage.setItem(this.auth.LOCALSTORAGE_IS_LOGIN, 'true');
+                localStorage.setItem(this.auth.LOCALSTORAGE_TOKEN, token);
                 this._router.navigateByUrl('feature');
                 console.log("daskboard: " + token)
             },
