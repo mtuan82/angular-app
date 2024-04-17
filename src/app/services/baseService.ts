@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class BaseService {
 
     private readonly identityUrl: string = "https://localhost:7196";
+    public readonly LOCALSTORAGE_TOKEN: string = 'token';
 
     constructor(public _router: Router, private http: HttpClient) { }
 
@@ -25,11 +26,14 @@ export class BaseService {
                     }
                 },
                 error: (res: any) => {
-                    debugger
                     if (res.status === 403 || res.status === 401) {
+                        localStorage.clear();
                         this._router.navigateByUrl('/login');
                     }
-                    s.error(res.error);
+                    else
+                    {
+                        s.error(res.error);
+                    }
                 }
             });
         });
@@ -49,9 +53,13 @@ export class BaseService {
                 },
                 error: (res: any) => {
                     if (res.status === 403 || res.status === 401) {
+                        localStorage.clear();
                         this._router.navigateByUrl('/login')
                     }
-                    s.error(res.error);
+                    else
+                    {
+                        s.error(res.error);
+                    }
                 }
             });
         });

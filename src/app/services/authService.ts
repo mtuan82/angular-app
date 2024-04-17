@@ -8,7 +8,7 @@ import { BaseService } from './baseService';
 export class AuthService extends BaseService implements OnDestroy {
 
     public readonly LOCALSTORAGE_IS_LOGIN: string = 'user_signed_in_app';
-    public readonly LOCALSTORAGE_TOKEN: string = 'token';
+    
     private _authSub$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     public get isAuthenticated(): Observable<boolean> {
@@ -88,7 +88,7 @@ export class AuthService extends BaseService implements OnDestroy {
     }
 
     public logout(redirect: string): Observable<void> {
-        localStorage.removeItem(this.LOCALSTORAGE_IS_LOGIN);
+        localStorage.clear();
         return new Observable((s) => {
             this.get("/api/Account/Logout", { token: "" }).subscribe({
                 next: () => {
