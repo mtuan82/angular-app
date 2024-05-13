@@ -8,15 +8,15 @@ import { Observable } from 'rxjs';
 })
 export class BaseService {
 
-    private readonly identityUrl: string = "https://localhost:7196";
+
     public readonly LOCALSTORAGE_TOKEN: string = 'token';
 
     constructor(public _router: Router, private http: HttpClient) { }
 
     public post(url: string, body: any, header: HeaderConfig): Observable<any> {
-        const headers = { 'Authorization': 'Bearer ' + header.token };
+        const headers = { 'Authorization': 'Bearer ' + header.token, 'content-type': 'application/json' };
         return new Observable((s) => {
-            this.http.post(this.identityUrl + url, body, { headers, observe: "response" }).subscribe({
+            this.http.post(url, body, { headers, observe: "response" }).subscribe({
                 next: (res: any) => {
                     if (res.body.isSuccessful) {
                         s.next(res.body);
@@ -42,7 +42,7 @@ export class BaseService {
     public get(url: string, header: HeaderConfig): Observable<any> {
         const headers = { 'Authorization': 'Bearer ' + header.token };
         return new Observable((s) => {
-            this.http.get(this.identityUrl + url, { headers, observe: "response" }).subscribe({
+            this.http.get(url, { headers, observe: "response" }).subscribe({
                 next: (res: any) => {
                     if (res.body.isSuccessful) {
                         s.next(res.body);

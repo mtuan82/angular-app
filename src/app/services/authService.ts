@@ -1,6 +1,7 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, catchError, map, Observable } from 'rxjs';
 import { BaseService } from './baseService';
+import { environment } from '../../environment';
 
 @Injectable({
     providedIn: 'root'
@@ -26,7 +27,7 @@ export class AuthService extends BaseService implements OnDestroy {
     public register(model: RegisterModel): Observable<void> {
 
         return new Observable((s) => {
-            this.post("/api/Account/Register",
+            this.post(environment.identityUrl + "/api/Account/Register",
                 {
                     "twoFactorEnabled": model.twoFactorEnabled,
                     "role": model.role,
@@ -47,7 +48,6 @@ export class AuthService extends BaseService implements OnDestroy {
                         }
                     },
                     error: (res: any) => {
-                        debugger
                         s.error(res)
                     }
                 });
@@ -63,7 +63,7 @@ export class AuthService extends BaseService implements OnDestroy {
         }
 
         return new Observable((s) => {
-            this.post("/api/Account/Login",
+            this.post(environment.identityUrl + "/api/Account/Login",
                 {
                     "email": username,
                     "password": password
@@ -90,7 +90,7 @@ export class AuthService extends BaseService implements OnDestroy {
     public logout(redirect: string): Observable<void> {
         localStorage.clear();
         return new Observable((s) => {
-            this.get("/api/Account/Logout", { token: "" }).subscribe({
+            this.get(environment.identityUrl + "/api/Account/Logout", { token: "" }).subscribe({
                 next: () => {
                     this._authSub$.next(false);
                     this._router.navigateByUrl(redirect);
